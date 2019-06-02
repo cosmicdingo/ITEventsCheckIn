@@ -3,7 +3,7 @@ package com.example.iteventscheck_in.features.events.domain.model
 class Event(
     val id: Int,
     val title: String,
-    val city: List<City>,
+    val cities: List<City>,
     val description: String,
     val format: Int,
     val date: Date,
