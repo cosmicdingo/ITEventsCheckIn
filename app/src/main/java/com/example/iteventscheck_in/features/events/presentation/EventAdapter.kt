@@ -1,6 +1,5 @@
 package com.example.iteventscheck_in.features.events.presentation
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.iteventscheck_in.R
 import com.example.iteventscheck_in.extensions.toConvertDate
-import com.example.iteventscheck_in.features.events.domain.model.City
 import com.example.iteventscheck_in.features.events.domain.model.Event
 import com.squareup.picasso.Picasso
 

@@ -1,9 +1,13 @@
 package com.example.iteventscheck_in.features.events.domain.repository
 
+import androidx.lifecycle.LiveData
+import com.example.iteventscheck_in.features.events.Take
 import com.example.iteventscheck_in.features.events.domain.model.Event
-import com.example.iteventscheck_in.network.Carry
+import io.reactivex.Observable
 
 interface EventsRepository {
 
-    fun getEvents(carry: Carry<List<Event>>)
+    fun getEvents(): Observable<List<Event>>
+    fun getEvents(take: Take<LiveData<List<Event>>>)
+
 }

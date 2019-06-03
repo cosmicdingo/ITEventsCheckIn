@@ -2,7 +2,8 @@ package com.example.iteventscheck_in.features.events.presentation
 
 import com.example.iteventscheck_in.features.events.domain.interactors.EventsInteractor
 import com.example.iteventscheck_in.features.events.domain.model.Event
-import com.example.iteventscheck_in.network.Carry
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 class MainPresenterImpl(
     private val view: MainPresenter.View,
@@ -11,25 +12,16 @@ class MainPresenterImpl(
 
 
     override fun onResume() {
-
-        loadEvents();
+        loadEvents()
     }
 
     private fun loadEvents() {
         view.showProgress()
 
-        interactor.getEvents(object : Carry<List<Event>> {
-            override fun onSuccess(result: List<Event>) {
-                view.hideProgress()
-                view.showEventList(result)
-            }
-
-            override fun onFailure(throwable: Throwable) {
-                view.hideProgress()
-                view.showError(throwable.message)
-            }
-
-        })
+        interactor.getEvents().subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ t: List<Event> -> view.showEventList(t) },
+                { error -> error.printStackTrace() })
     }
 
     override fun onPause() {

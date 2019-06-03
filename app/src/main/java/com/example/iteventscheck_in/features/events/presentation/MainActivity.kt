@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity(), MainPresenter.View {
     private fun initUI() {
 
         eventRecyclerView = findViewById(R.id.recyclerView)
-        var eventLayoutManager = LinearLayoutManager(this)
+        val eventLayoutManager = LinearLayoutManager(this)
         eventRecyclerView!!.layoutManager = eventLayoutManager
 
     }
