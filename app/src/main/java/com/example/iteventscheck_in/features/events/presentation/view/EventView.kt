@@ -1,4 +1,4 @@
-package com.example.iteventscheck_in.features.events.presentation
+package com.example.iteventscheck_in.features.events.presentation.view
 
 import com.example.iteventscheck_in.features.BaseView
 import com.example.iteventscheck_in.features.events.domain.model.Event

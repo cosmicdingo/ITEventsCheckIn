@@ -1,14 +1,15 @@
-package com.example.iteventscheck_in.features.events.presentation
+package com.example.iteventscheck_in.features.events.presentation.presenter.impl
 
 import com.example.iteventscheck_in.features.events.domain.interactors.EventsInteractor
 import com.example.iteventscheck_in.features.events.domain.model.Event
+import com.example.iteventscheck_in.features.events.presentation.presenter.EventPresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class MainPresenterImpl(
-    private val view: MainPresenter.View,
+class EventPresenterImpl(
+    private val view: EventPresenter.View,
     private val interactor: EventsInteractor
-) : MainPresenter {
+) : EventPresenter {
 
 
     override fun onResume() {

@@ -1,4 +1,4 @@
-package com.example.iteventscheck_in.features.events.presentation
+package com.example.iteventscheck_in.features.events.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +14,6 @@ import com.squareup.picasso.Picasso
 class EventAdapter(private val eventList: List<Event>) : RecyclerView.Adapter<EventAdapter.ViewHolder>() {
 
     private val BASE_URL = "https://team.cft.ru/"
-    private val TAG = "EventAdapter"
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val cardView = LayoutInflater.from(parent.context).inflate(R.layout.cardview_item, parent, false)

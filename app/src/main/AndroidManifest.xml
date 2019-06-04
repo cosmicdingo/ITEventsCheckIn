@@ -12,7 +12,7 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".features.events.presentation.MainActivity">
+        <activity android:name="com.example.iteventscheck_in.features.events.presentation.view.activity.EventActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

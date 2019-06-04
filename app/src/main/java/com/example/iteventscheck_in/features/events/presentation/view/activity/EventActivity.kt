@@ -1,4 +1,4 @@
-package com.example.iteventscheck_in.features.events.presentation
+package com.example.iteventscheck_in.features.events.presentation.view.activity
 
 import android.os.Bundle
 import android.util.Log
@@ -7,22 +7,26 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.iteventscheck_in.R
 import com.example.iteventscheck_in.features.events.domain.model.Event
+import com.example.iteventscheck_in.features.events.presentation.adapter.EventAdapter
+import com.example.iteventscheck_in.features.events.presentation.presenter.factory.PresenterFactory
+import com.example.iteventscheck_in.features.events.presentation.presenter.EventPresenter
 
-class MainActivity : AppCompatActivity(), MainPresenter.View {
+class EventActivity : AppCompatActivity(), EventPresenter.View {
 
-    private val TAG = "MainActivity"
+    private val TAG = "EventActivity"
 
     private var eventRecyclerView: RecyclerView? = null
     private var eventAdapter: EventAdapter? = null
 
-    private var presenter: MainPresenter? = null
+    private var presenter: EventPresenter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         initUI()
-        presenter = PresenterFactory.createPresenter(this)
+        presenter =
+            PresenterFactory.createPresenter(this)
     }
 
     private fun initUI() {

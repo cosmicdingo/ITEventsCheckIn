@@ -1,4 +1,4 @@
-package com.example.iteventscheck_in.features.events.data
+package com.example.iteventscheck_in.features.events.data.api
 
 import com.example.iteventscheck_in.features.events.domain.model.Event
 import io.reactivex.Observable
