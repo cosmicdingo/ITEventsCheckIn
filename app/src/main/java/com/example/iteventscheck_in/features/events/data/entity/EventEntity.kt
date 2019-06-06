@@ -8,8 +8,8 @@ import androidx.room.PrimaryKey
 data class EventEntity(
     @PrimaryKey val id: Int,
     val title: String,
-    val city: String,
     val description: String,
-    val date: String,
+    @ColumnInfo(name = "start_date") val startDate: String,
+    @ColumnInfo(name = "end_date") val endDate: String,
     @ColumnInfo(name = "card_image") val cardImage: String
 )

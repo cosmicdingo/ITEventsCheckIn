@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.iteventscheck_in.features.events.data.entity.EventEntity
+import io.reactivex.Maybe
 
 @Dao
 interface EventDao {
@@ -17,6 +18,9 @@ interface EventDao {
 
     @Query("SELECT * FROM EventEntity")
     fun getAllEventsLiveData(): LiveData<List<EventEntity>>
+
+    @Query("SELECT * FROM EventEntity")
+    fun getAllEventsMaybe(): Maybe<List<EventEntity>>
 
     @Insert
     fun insertEvents(vararg events: EventEntity)

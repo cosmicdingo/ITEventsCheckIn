@@ -5,11 +5,11 @@ class Event(
     val title: String,
     val cities: List<City>,
     val description: String,
-    val format: Int,
+    //val format: Int,
     val date: Date,
-    val cardImage: String,
-    val status: Int,
+    val cardImage: String
+    /*val status: Int,
     val iconStatus: String,
     val eventFormat: String,
-    val eventFormatEng: String
+    val eventFormatEng: String*/
 )

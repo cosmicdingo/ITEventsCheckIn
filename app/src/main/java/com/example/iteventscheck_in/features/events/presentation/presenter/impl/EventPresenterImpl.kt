@@ -3,8 +3,6 @@ package com.example.iteventscheck_in.features.events.presentation.presenter.impl
 import com.example.iteventscheck_in.features.events.domain.interactors.EventsInteractor
 import com.example.iteventscheck_in.features.events.domain.model.Event
 import com.example.iteventscheck_in.features.events.presentation.presenter.EventPresenter
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 
 class EventPresenterImpl(
     private val view: EventPresenter.View,
@@ -19,10 +17,15 @@ class EventPresenterImpl(
     private fun loadEvents() {
         view.showProgress()
 
-        interactor.getEvents().subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ t: List<Event> -> view.showEventList(t) },
-                { error -> error.printStackTrace() })
+        interactor.getEventsFromNetwork().subscribe(
+            { t: List<Event> -> view.showEventList(t) },
+            { error -> error.printStackTrace() },
+            {
+                interactor.getEventsFromLocal().subscribe(
+                    { t: List<Event> -> view.showEventList(t) },
+                    { t: Throwable -> t.printStackTrace() }
+                )
+            })
     }
 
     override fun onPause() {

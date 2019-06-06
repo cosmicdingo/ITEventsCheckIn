@@ -17,7 +17,6 @@ class App : Application() {
         super.onCreate()
         retrofitProvider = RetrofitProvider()
         databaseProvider = DatabaseProvider(applicationContext)
-        //RxJavaPlugins.setErrorHandler { throwable -> {} }
     }
 
     companion object {
