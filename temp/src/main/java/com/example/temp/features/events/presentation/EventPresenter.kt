@@ -1,7 +1,6 @@
 package com.example.temp.features.events.presentation
 
 import com.example.temp.features.MvpPresenter
-import com.example.temp.features.MvpView
 import com.example.temp.features.events.domain.interactors.EventsInteractor
 import com.example.temp.features.events.domain.model.Event
 import com.example.temp.network.Carry

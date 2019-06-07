@@ -9,6 +9,7 @@ import com.example.iteventscheck_in.features.events.domain.model.Date
 import com.example.iteventscheck_in.features.events.domain.model.Event
 
 import com.example.iteventscheck_in.features.events.domain.repository.EventsRepository
+import io.reactivex.Completable
 import io.reactivex.Maybe
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -20,35 +21,26 @@ class EventsRepositoryImpl(
 ) : EventsRepository {
 
     override fun getEventsFromNetwork() = networkDataSource.getEvents()
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())!!
 
-    override fun getEventsFromLocal(): Maybe<List<Event>> {
-
-        return localDataSource.getEvents()
+    override fun getEventsWithCitiesFromLocal(): Maybe<List<Event>> {
+        return localDataSource.getEventsWithCities()
             .map {
-                convertEventsFromEntityToModel(it)
+                it.map {
+                    Event(
+                        it.id,
+                        it.title,
+                        it.cities.map { City(it.cityId, it.nameRus) },
+                        it.description,
+                        Date(it.startDate, it.endDate),
+                        it.cardImage
+                    )
+                }
             }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    private fun convertEventsFromEntityToModel(eventsEntityList: List<EventEntity>): List<Event> {
-
-        val citiesList: List<City> = covertCitiesFromEntityToModelList(localDataSource.getCities())
-        return eventsEntityList.map {
-            Event(
-                it.id, it.title, citiesList, it.description,
-                Date(it.startDate, it.endDate), it.cardImage
-            )
-        }
-    }
-
-    private fun covertCitiesFromEntityToModelList(citiesEntityList: List<CityEntity>): List<City> {
-        return citiesEntityList.map {
-            City(it.id, it.nameRus)
-        }
-    }
-
-
+    // кладем данные в бд
+    override fun putEventsInDatabase(eventsList: List<Event>): Completable =
+        localDataSource.putEventsInDatabase(eventsList)
 }

@@ -8,11 +8,12 @@ import androidx.room.PrimaryKey
 @Entity(foreignKeys = [ForeignKey(entity = EventEntity::class, parentColumns = ["id"], childColumns = ["event_id"])])
 class CityEntity(
     @PrimaryKey
-    val id: Int,
-    val nameRus: String,
-    val nameEng: String,
-    val icon: String,
-    val isActiv: Boolean,
     @ColumnInfo(name = "event_id")
-    val eventId: Int
+    val eventId: Int,
+    val nameRus: String,
+    //val nameEng: String,
+    //val icon: String,
+    //val isActiv: Boolean,
+
+    val cityId: Int
 )

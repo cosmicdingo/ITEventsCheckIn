@@ -34,7 +34,6 @@ class EventActivity : AppCompatActivity(), EventPresenter.View {
         eventRecyclerView = findViewById(R.id.recyclerView)
         val eventLayoutManager = LinearLayoutManager(this)
         eventRecyclerView!!.layoutManager = eventLayoutManager
-
     }
 
     override fun onResume() {

@@ -1,27 +1,21 @@
 package com.example.iteventscheck_in.features.events.data.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.example.iteventscheck_in.features.events.data.entity.EventEntity
+import com.example.iteventscheck_in.features.events.data.entity.EventsWithCities
 import io.reactivex.Maybe
 
 @Dao
 interface EventDao {
 
-    @Query("SELECT * FROM EventEntity")
-    fun getAllEvents(): List<EventEntity>
-
     @Query("SELECT * FROM EventEntity WHERE id = :id")
     fun getEventById(id: Int): EventEntity
 
-    @Query("SELECT * FROM EventEntity")
-    fun getAllEventsLiveData(): LiveData<List<EventEntity>>
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertEvents(eventsEntityList: List<EventEntity>)
 
-    @Query("SELECT * FROM EventEntity")
-    fun getAllEventsMaybe(): Maybe<List<EventEntity>>
-
-    @Insert
-    fun insertEvents(vararg events: EventEntity)
+    @Transaction
+    @Query("SELECT id, title, description, start_date AS startDate, end_date AS endDate, card_image AS cardImage FROM EventEntity")
+    fun getAllEventsWithCitiesMaybe():Maybe<List<EventsWithCities>>
 }
